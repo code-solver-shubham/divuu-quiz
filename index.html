@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Divuu & Shubham ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family: "Trebuchet MS", sans-serif;
+    background:
+        radial-gradient(circle at top,#351d3e,#130f1c 45%,#08070d);
+    color:white;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    opacity:.7;
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:.15;transform:scale(.5)}
+    to{opacity:1;transform:scale(1.5)}
+}
+
+/* FLOATING HEARTS */
+
+.heart{
+    position:fixed;
+    bottom:-30px;
+    font-size:20px;
+    opacity:.6;
+    animation:floatUp linear forwards;
+    pointer-events:none;
+    z-index:1;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) scale(.7) rotate(0);
+        opacity:0;
+    }
+    20%{opacity:.8}
+    100%{
+        transform:translateY(-110vh) scale(1.4) rotate(30deg);
+        opacity:0;
+    }
+}
+
+/* MAIN */
+
+.app{
+    position:relative;
+    z-index:2;
+    width:min(92%,700px);
+    margin:auto;
+    padding:25px 0 60px;
+}
+
+/* HEADER */
+
+.header{
+    text-align:center;
+    padding:25px 10px;
+}
+
+.moon{
+    font-size:55px;
+    animation:moonGlow 2s infinite alternate;
+}
+
+@keyframes moonGlow{
+    from{
+        filter:drop-shadow(0 0 5px #fff);
+        transform:rotate(-5deg);
+    }
+    to{
+        filter:drop-shadow(0 0 30px #ffe8a8);
+        transform:rotate(5deg);
+    }
+}
+
+.header h1{
+    font-family:cursive;
+    font-size:clamp(34px,8vw,55px);
+    margin-top:8px;
+}
+
+.header p{
+    color:#d8cbdc;
+    margin-top:8px;
+}
+
+/* CARD */
+
+.quiz-card{
+    background:rgba(255,255,255,.075);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+    border-radius:28px;
+    padding:25px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    animation:cardIn .7s ease;
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+/* PROGRESS */
+
+.progress-area{
+    margin-bottom:22px;
+}
+
+.progress-text{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    color:#d7c7da;
+    margin-bottom:8px;
+}
+
+.progress{
+    height:8px;
+    background:#2b2531;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#ff7bbd,#ffd37a);
+    border-radius:20px;
+    transition:width .6s ease;
+}
+
+/* QUESTION */
+
+.question-number{
+    color:#ff9dcb;
+    font-weight:bold;
+    font-size:14px;
+    letter-spacing:2px;
+}
+
+.question{
+    font-size:clamp(22px,5vw,31px);
+    line-height:1.3;
+    margin:12px 0 22px;
+}
+
+.question-icon{
+    font-size:45px;
+    margin-bottom:10px;
+    animation:bounce 1.7s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+
+/* OPTIONS */
+
+.options{
+    display:grid;
+    gap:12px;
+}
+
+.option{
+    position:relative;
+    width:100%;
+    border:none;
+    color:white;
+    text-align:left;
+    padding:17px 50px 17px 18px;
+    border-radius:17px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+    cursor:pointer;
+    font-size:16px;
+    transition:.25s;
+    overflow:hidden;
+}
+
+.option:hover{
+    transform:translateY(-3px);
+    background:rgba(255,126,187,.15);
+    border-color:#ff8fbd;
+}
+
+.option:active{
+    transform:scale(.97);
+}
+
+.option.correct{
+    background:rgba(45,190,120,.2);
+    border-color:#51e09b;
+    animation:correctPop .5s ease;
+}
+
+.option.wrong{
+    background:rgba(255,60,90,.15);
+    border-color:#ff607a;
+    animation:shake .45s ease;
+}
+
+@keyframes correctPop{
+    0%{transform:scale(.95)}
+    60%{transform:scale(1.03)}
+    100%{transform:scale(1)}
+}
+
+@keyframes shake{
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-9px)}
+    40%{transform:translateX(9px)}
+    60%{transform:translateX(-6px)}
+    80%{transform:translateX(6px)}
+}
+
+.tick{
+    position:absolute;
+    right:17px;
+    font-size:23px;
+    opacity:0;
+}
+
+.option.correct .tick{
+    opacity:1;
+    animation:tickIn .4s ease;
+}
+
+@keyframes tickIn{
+    from{
+        transform:scale(0) rotate(-40deg);
+    }
+    to{
+        transform:scale(1) rotate(0);
+    }
+}
+
+/* FEEDBACK */
+
+.feedback{
+    min-height:25px;
+    margin-top:15px;
+    text-align:center;
+    font-size:15px;
+    color:#ffd4e7;
+}
+
+/* NEXT */
+
+.next-btn{
+    width:100%;
+    margin-top:18px;
+    padding:15px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(135deg,#ff75b7,#ffb46e);
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    display:none;
+    box-shadow:0 8px 25px rgba(255,100,170,.25);
+}
+
+.next-btn.show{
+    display:block;
+    animation:buttonIn .4s ease;
+}
+
+@keyframes buttonIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+/* FINAL SCREEN */
+
+.final-screen{
+    display:none;
+    text-align:center;
+}
+
+.final-screen.active{
+    display:block;
+    animation:cardIn .8s ease;
+}
+
+.final-screen h2{
+    font-family:cursive;
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.final-screen p{
+    color:#ddd0df;
+    line-height:1.6;
+}
+
+/* GIFT */
+
+.gift-area{
+    height:300px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.gift{
+    position:relative;
+    width:150px;
+    height:120px;
+    cursor:pointer;
+    animation:giftFloat 2s infinite ease-in-out;
+}
+
+@keyframes giftFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+}
+
+.box{
+    position:absolute;
+    bottom:20px;
+    width:150px;
+    height:100px;
+    background:linear-gradient(135deg,#ff4f9b,#9d3d9f);
+    border-radius:8px;
+    box-shadow:0 15px 40px rgba(255,50,150,.35);
+}
+
+.lid{
+    position:absolute;
+    top:65px;
+    left:-8px;
+    width:166px;
+    height:35px;
+    background:linear-gradient(135deg,#ff74b1,#bd54b7);
+    border-radius:8px;
+    z-index:3;
+    transition:1s;
+}
+
+.ribbon-v{
+    position:absolute;
+    left:62px;
+    top:0;
+    width:25px;
+    height:120px;
+    background:#ffd36b;
+    z-index:4;
+}
+
+.ribbon-h{
+    position:absolute;
+    left:0;
+    top:12px;
+    width:100%;
+    height:25px;
+    background:#ffd36b;
+    z-index:5;
+}
+
+.bow{
+    position:absolute;
+    top:35px;
+    left:55px;
+    z-index:6;
+    font-size:40px;
+}
+
+.gift.open .lid{
+    transform:translateY(-90px) rotate(-8deg);
+}
+
+.gift-text{
+    position:absolute;
+    bottom:-20px;
+    width:100%;
+    text-align:center;
+    color:#ffd9eb;
+    font-size:13px;
+}
+
+/* PHOTO REVEAL */
+
+.photo-reveal{
+    display:none;
+    margin-top:20px;
+}
+
+.photo-reveal.active{
+    display:block;
+    animation:fadeIn .8s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+.photo-card{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:22px;
+    padding:12px;
+    margin:15px 0;
+    animation:photoIn .8s ease;
+}
+
+@keyframes photoIn{
+    from{
+        opacity:0;
+        transform:translateY(25px) rotate(-2deg);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.photo-card img{
+    width:100%;
+    max-height:500px;
+    object-fit:cover;
+    border-radius:16px;
+    display:block;
+}
+
+.photo-caption{
+    padding:13px 8px 5px;
+    font-family:cursive;
+    color:#ffd4e8;
+    font-size:18px;
+}
+
+/* LETTER */
+
+.letter{
+    margin-top:25px;
+    padding:24px;
+    text-align:left;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,180,210,.2);
+    border-radius:20px;
+    line-height:1.8;
+    color:#eadfea;
+}
+
+.letter-title{
+    font-family:cursive;
+    font-size:28px;
+    color:#ffb5d5;
+    margin-bottom:12px;
+}
+
+/* CONFETTI */
+
+.confetti{
+    position:fixed;
+    top:-20px;
+    width:8px;
+    height:14px;
+    z-index:100;
+    animation:confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+/* HEART BURST */
+
+.burst{
+    position:fixed;
+    z-index:101;
+    pointer-events:none;
+    animation:burst 1.2s ease forwards;
+}
+
+@keyframes burst{
+    from{
+        opacity:1;
+        transform:translate(0,0) scale(.5);
+    }
+    to{
+        opacity:0;
+        transform:translate(var(--x),var(--y)) scale(1.8);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    .app{
+        width:94%;
+    }
+
+    .quiz-card{
+        padding:19px;
+        border-radius:23px;
+    }
+
+    .question{
+        font-size:22px;
+    }
+
+    .option{
+        font-size:15px;
+        padding:15px 45px 15px 15px;
+    }
+
+    .final-screen h2{
+        font-size:35px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="app">
+
+<header class="header">
+    <div class="moon">🌙</div>
+    <h1>Divuu's Little Quiz</h1>
+    <p>Let's see how much you remember about us... ❤️</p>
+</header>
+
+
+<div class="quiz-card" id="quizCard">
+
+    <div class="progress-area">
+
+        <div class="progress-text">
+            <span id="progressText">Memory 1 of 8</span>
+            <span id="scoreText">0 ❤️</span>
+        </div>
+
+        <div class="progress">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+    </div>
+
+    <div id="questionArea">
+
+        <div class="question-icon" id="questionIcon">💌</div>
+
+        <div class="question-number" id="questionNumber">
+            MEMORY 01
+        </div>
+
+        <div class="question" id="question">
+            Where did our story begin?
+        </div>
+
+        <div class="options" id="options"></div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <button class="next-btn" id="nextBtn">
+            Next Memory → ❤️
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- FINAL -->
+
+<div class="quiz-card final-screen" id="finalScreen">
+
+    <div style="font-size:55px;">🎉</div>
+
+    <h2>You remembered us! ❤️</h2>
+
+    <p>
+        But I didn't make this quiz just to test your memory...
+        <br>
+        I made it because every little answer here
+        is a piece of our story.
+    </p>
+
+    <div class="gift-area">
+
+        <div class="gift" id="gift">
+
+            <div class="bow">🎀</div>
+
+            <div class="lid"></div>
+
+            <div class="box"></div>
+
+            <div class="ribbon-v"></div>
+            <div class="ribbon-h"></div>
+
+            <div class="gift-text">
+                Tap me, bacha... 🎁
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="photo-reveal" id="photoReveal">
+
+        <h2 style="font-family:cursive;color:#ffb6d5;">
+            A little surprise for you... 🥺❤️
+        </h2>
+
+        <div id="photos"></div>
+
+        <div class="letter">
+
+            <div class="letter-title">
+                Divuuu bacha... ❤️
+            </div>
+
+            <p>
+                Aap meri life mein sirf meri girlfriend banke nahi aayi ho.
+                Aap meri comfort ho, meri peace ho, meri sabse cute problem ho,
+                meri lucku charm ho, meri bacha ho, meri gendi, meri kutti,
+                meri billi ji ho. 😭❤️
+            </p>
+
+            <br>
+
+            <p>
+                Aur ek baat main aapko dil se bolna chahta hoon...
+                ab aapko kisi ko kuch prove karne ki zarurat nahi hai.
+                Na duniya ko, na mujhe, na kisi aur ko.
+            </p>
+
+            <br>
+
+            <p>
+                Aap jaisi ho, mere liye waise hi enough ho.
+                Aapke saath jo moments mile hain,
+                woh mere liye kisi gift se kam nahi hain.
+            </p>
+
+            <br>
+
+            <p>
+                Main humesha aapse pyaar karta rahunga,
+                meri Divuuu bacha gendi kutti billi jiii. 🥺❤️
+            </p>
+
+            <br>
+
+            <p style="text-align:center;font-family:cursive;font-size:22px;color:#ffb7d5;">
+                You don't have to prove anything anymore.
+                <br>
+                I'm with you. Always. ❤️
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   STARS
+========================= */
+
+const stars = document.getElementById("stars");
+
+for(let i=0;i<80;i++){
+
+    const star=document.createElement("div");
+
+    star.className="star";
+
+    star.style.left=Math.random()*100+"%";
+    star.style.top=Math.random()*100+"%";
+
+    star.style.animationDelay=(Math.random()*3)+"s";
+
+    stars.appendChild(star);
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHeart(){
+
+    const heart=document.createElement("div");
+
+    heart.className="heart";
+
+    const hearts=["❤️","💕","💗","💖","✨","🌸"];
+
+    heart.textContent=hearts[
+        Math.floor(Math.random()*hearts.length)
+    ];
+
+    heart.style.left=Math.random()*100+"%";
+
+    heart.style.animationDuration=
+        (5+Math.random()*5)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },10000);
+}
+
+setInterval(createHeart,1000);
+
+
+/* =========================
+   QUIZ DATA
+========================= */
+
+const quiz=[
+
+{
+icon:"📺",
+question:"Where did our story begin on 13 January?",
+options:[
+"YouTube ❤️",
+"Instagram",
+"School",
+"WhatsApp"
+],
+answer:0,
+correct:"Of course you remember... our story started on YouTube. 🥺❤️",
+wrong:"Bacha 😭 think about where our first chapter actually started..."
+},
+
+{
+icon:"🕓",
+question:"What was the challenge you gave this shy boy?",
+options:[
+"Talk for 5 minutes on video call",
+"Sing a song",
+"Send 20 selfies",
+"Do 100 pushups"
+],
+answer:0,
+correct:"YESSS 😂❤️ The legendary 5-minute video-call challenge!",
+wrong:"Nooo 😭 You know this one... remember that super shy boy?"
+},
+
+{
+icon:"🙈",
+question:"What was I doing during that first video call because I was SO shy?",
+options:[
+"Doing pushups and looking everywhere except your eyes",
+"Dancing",
+"Sleeping",
+"Cooking"
+],
+answer:0,
+correct:"HAHAHA YES 😭🤣 I was treating a video call like an SSB interview!",
+wrong:"Bacha think harder 😂 What was that stupid shy boy doing?"
+},
+
+{
+icon:"💋",
+question:"What happened during that memorable time?",
+options:[
+"You gave me my first kiss ❤️",
+"We went shopping",
+"We watched a movie",
+"We cooked together"
+],
+answer:0,
+correct:"🥺❤️ And somehow that tiny moment became one of my biggest memories.",
+wrong:"Nooo bacha 😭 this memory is too special to forget."
+},
+
+{
+icon:"📅",
+question:"When was our first meetup?",
+options:[
+"2 March",
+"13 January",
+"27 March",
+"19 August"
+],
+answer:0,
+correct:"2 March ❤️ Our first meetup. A date I'll always remember.",
+wrong:"Almost 😭 Look at our little timeline again..."
+},
+
+{
+icon:"💍",
+question:"When did I propose to you?",
+options:[
+"3 March",
+"16 February",
+"26 July",
+"1 August"
+],
+answer:0,
+correct:"3 March ❤️ The day I finally said what my heart already knew.",
+wrong:"Nooo 😭 You know this date, bacha..."
+},
+
+{
+icon:"🥺",
+question:"When was our first fight?",
+options:[
+"27 March",
+"2 March",
+"19 August",
+"10 October"
+],
+answer:0,
+correct:"27 March 😭❤️ Our first fight... and somehow we still kept choosing each other.",
+wrong:"Hehe 😭 remember those cute little fights we used to have?"
+},
+
+{
+icon:"🔐",
+question:"FINAL SECRET — What is our special password?",
+options:[
+"131018",
+"131008",
+"103118",
+"130118"
+],
+answer:0,
+correct:"🔓 SECRET UNLOCKED. You remembered our little code. ❤️",
+wrong:"🔐 Nope... think about 13 • 10 • 18..."
+}
+
+];
+
+
+let current=0;
+let score=0;
+let answered=false;
+
+const questionIcon=
+document.getElementById("questionIcon");
+
+const questionNumber=
+document.getElementById("questionNumber");
+
+const question=
+document.getElementById("question");
+
+const options=
+document.getElementById("options");
+
+const feedback=
+document.getElementById("feedback");
+
+const nextBtn=
+document.getElementById("nextBtn");
+
+const progressFill=
+document.getElementById("progressFill");
+
+const progressText=
+document.getElementById("progressText");
+
+const scoreText=
+document.getElementById("scoreText");
+
+
+/* =========================
+   LOAD QUESTION
+========================= */
+
+function loadQuestion(){
+
+    answered=false;
+
+    const q=quiz[current];
+
+    questionIcon.textContent=q.icon;
+
+    questionNumber.textContent=
+        "MEMORY "+String(current+1).padStart(2,"0");
+
+    question.textContent=q.question;
+
+    progressText.textContent=
+        `Memory ${current+1} of ${quiz.length}`;
+
+    scoreText.textContent=
+        `${score} ❤️`;
+
+    progressFill.style.width=
+        ((current)/quiz.length*100)+"%";
+
+    feedback.textContent="";
+
+    nextBtn.classList.remove("show");
+
+    options.innerHTML="";
+
+    q.options.forEach((text,index)=>{
+
+        const button=document.createElement("button");
+
+        button.className="option";
+
+        button.innerHTML=`
+            ${text}
+            <span class="tick">✓</span>
+        `;
+
+        button.onclick=()=>selectAnswer(index,button);
+
+        options.appendChild(button);
+
+    });
+
+}
+
+
+/* =========================
+   ANSWER
+========================= */
+
+function selectAnswer(index,button){
+
+    if(answered) return;
+
+    const q=quiz[current];
+
+    if(index===q.answer){
+
+        answered=true;
+
+        score++;
+
+        button.classList.add("correct");
+
+        feedback.textContent=q.correct;
+
+        scoreText.textContent=
+            `${score} ❤️`;
+
+        progressFill.style.width=
+            ((current+1)/quiz.length*100)+"%";
+
+        createConfetti();
+
+        heartBurst();
+
+        setTimeout(()=>{
+
+            nextBtn.classList.add("show");
+
+        },600);
+
+    }else{
+
+        button.classList.add("wrong");
+
+        feedback.textContent=q.wrong;
+
+        setTimeout(()=>{
+
+            button.classList.remove("wrong");
+
+        },500);
+
+    }
+
+}
+
+
+/* =========================
+   NEXT
+========================= */
+
+nextBtn.onclick=()=>{
+
+    current++;
+
+    if(current<quiz.length){
+
+        const area=document.getElementById("questionArea");
+
+        area.style.animation="none";
+
+        void area.offsetWidth;
+
+        area.style.animation=
+            "cardIn .6s ease";
+
+        loadQuestion();
+
+    }else{
+
+        showFinal();
+
+    }
+
+};
+
+
+/* =========================
+   FINAL
+========================= */
+
+function showFinal(){
+
+    document.getElementById("quizCard").style.display="none";
+
+    const final=document.getElementById("finalScreen");
+
+    final.classList.add("active");
+
+    createConfetti();
+
+}
+
+
+/* =========================
+   GIFT
+========================= */
+
+const gift=document.getElementById("gift");
+
+gift.onclick=()=>{
+
+    if(gift.classList.contains("open")) return;
+
+    gift.classList.add("open");
+
+    createConfetti();
+
+    setTimeout(()=>{
+
+        document.getElementById("photoReveal")
+        .classList.add("active");
+
+        loadPhotos();
+
+    },900);
+
+};
+
+
+/* =========================
+   PHOTOS
+========================= */
+
+function loadPhotos(){
+
+    const container=
+        document.getElementById("photos");
+
+    const photos=[
+
+        {
+            src:"images/photo1.jpg",
+            text:"Our little memory... ❤️"
+        },
+
+        {
+            src:"images/photo2.jpg",
+            text:"That smile I could never get tired of seeing. 🥺"
+        },
+
+        {
+            src:"images/photo3.jpg",
+            text:"My favourite person being my favourite person. 💕"
+        },
+
+        {
+            src:"images/photo4.jpg",
+            text:"A moment I wish I could pause forever. 🌸"
+        },
+
+        {
+            src:"images/photo5.jpg",
+            text:"And then there's you... my Divuuu. ❤️"
+        }
+
+    ];
+
+    photos.forEach((photo,index)=>{
+
+        setTimeout(()=>{
+
+            const card=document.createElement("div");
+
+            card.className="photo-card";
+
+            card.innerHTML=`
+
+                <img src="${photo.src}"
+                alt="Our memory"
+                onerror="this.style.display='none'">
+
+                <div class="photo-caption">
+                    ${photo.text}
+                </div>
+
+            `;
+
+            container.appendChild(card);
+
+            card.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+        },index*700);
+
+    });
+
+}
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+function createConfetti(){
+
+    for(let i=0;i<80;i++){
+
+        const c=document.createElement("div");
+
+        c.className="confetti";
+
+        c.style.left=Math.random()*100+"vw";
+
+        c.style.background=
+            `hsl(${Math.random()*360},90%,70%)`;
+
+        c.style.animationDuration=
+            (2+Math.random()*2)+"s";
+
+        c.style.transform=
+            `rotate(${Math.random()*360}deg)`;
+
+        document.body.appendChild(c);
+
+        setTimeout(()=>{
+            c.remove();
+        },4000);
+
+    }
+
+}
+
+
+/* =========================
+   HEART BURST
+========================= */
+
+function heartBurst(){
+
+    for(let i=0;i<18;i++){
+
+        const h=document.createElement("div");
+
+        h.className="burst";
+
+        h.textContent=
+            ["❤️","💗","💕","✨"][Math.floor(Math.random()*4)];
+
+        h.style.left="50%";
+        h.style.top="45%";
+
+        h.style.setProperty(
+            "--x",
+            (Math.random()*400-200)+"px"
+        );
+
+        h.style.setProperty(
+            "--y",
+            (Math.random()*400-200)+"px"
+        );
+
+        document.body.appendChild(h);
+
+        setTimeout(()=>{
+            h.remove();
+        },1300);
+
+    }
+
+}
+
+
+/* START */
+
+loadQuestion();
+
+</script>
+
+</body>
+  </html>
